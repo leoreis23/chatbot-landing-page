@@ -1,1 +1,259 @@
+git clone https://github.com/seu-usuario/chatbot-landing-page.git
+cd chatbot-landing-page
+
+# Adicione os arquivos index.html e styles.css
+echo '
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot de Atendimento ao Cliente</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        header img {
+            height: 50px;
+        }
+        nav {
+            text-align: center;
+            margin-top: 10px;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        .main-content {
+            padding: 20px;
+            text-align: center;
+        }
+        .chatbox {
+            width: 400px;
+            height: 500px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 0 auto;
+            overflow-y: scroll;
+            background: #fff;
+        }
+        .message {
+            margin: 10px 0;
+        }
+        .user {
+            text-align: right;
+            color: blue;
+        }
+        .bot {
+            text-align: left;
+            color: green;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            margin: 10px;
+        }
+        button {
+            padding: 10px;
+        }
+        footer {
+            background: #333;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+            margin-top: 20px;
+        }
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="logo.png" alt="Logo da Empresa">
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Sobre</a>
+        <a href="#">Contato</a>
+    </nav>
+</header>
+
+<div class="main-content">
+    <h1>Bem-vindo ao Nosso Atendimento ao Cliente</h1>
+    <p>Utilize nosso chatbot para obter informações e agendar serviços rapidamente.</p>
+    <div id="chatbox" class="chatbox">
+        <div class="message bot">Bem-vindo! Como posso ajudar você hoje? Você pode escolher uma das seguintes opções:
+            <ul>
+                <li>1. Localização</li>
+                <li>2. Telefone</li>
+                <li>3. Horário de Funcionamento</li>
+                <li>4. Serviços Prestados</li>
+                <li>5. Agendamento</li>
+            </ul>
+        </div>
+    </div>
+    <input type="text" id="userInput" placeholder="Digite sua opção aqui...">
+    <button onclick="processInput()">Enviar</button>
+</div>
+
+<footer>
+    <p>© 2024 Empresa de Tecnologia. Todos os direitos reservados.</p>
+    <nav>
+        <a href="#">Política de Privacidade</a>
+        <a href="#">Termos de Serviço</a>
+    </nav>
+</footer>
+
+<script>
+    function addMessage(message, sender) {
+        const chatbox = document.getElementById('chatbox');
+        const messageElement = document.createElement('div');
+        messageElement.className = 'message ' + sender;
+        messageElement.innerHTML = message;
+        chatbox.appendChild(messageElement);
+        chatbox.scrollTop = chatbox.scrollHeight;
+    }
+
+    function processInput() {
+        const inputElement = document.getElementById('userInput');
+        const userInput = inputElement.value.trim();
+        inputElement.value = '';
+
+        if (userInput) {
+            addMessage(userInput, 'user');
+            handleResponse(userInput);
+        }
+    }
+
+    function handleResponse(userInput) {
+        let response = '';
+
+        switch(userInput) {
+            case '1':
+                response = "Nosso endereço é Rua das Flores, 123, Centro, São Paulo, SP.";
+                break;
+            case '2':
+                response = "Você pode nos ligar no número (11) 1234-5678.";
+                break;
+            case '3':
+                response = "Nosso horário de funcionamento é de segunda a sexta, das 9h às 18h, e aos sábados das 9h às 14h.";
+                break;
+            case '4':
+                response = "Oferecemos os seguintes serviços: Consultoria em TI, Desenvolvimento de Software, Suporte Técnico, e Treinamento em Tecnologia.";
+                break;
+            case '5':
+                response = "Para agendar um serviço, por favor, informe seu nome, a data e a hora desejada, e o tipo de serviço.";
+                break;
+            default:
+                response = "Desculpe, não entendi sua escolha. Por favor, escolha uma opção de 1 a 5.";
+                break;
+        }
+
+        addMessage(response, 'bot');
+
+        if (userInput === '5') {
+            setTimeout(() => {
+                const name = prompt("Por favor, informe seu nome:");
+                const date = prompt("Por favor, informe a data desejada (DD/MM/AAAA):");
+                const time = prompt("Por favor, informe a hora desejada (HH:MM):");
+                const service = prompt("Por favor, informe o tipo de serviço:");
+                addMessage(`Obrigado, ${name}. Seu agendamento para ${service} foi marcado para o dia ${date} às ${time}. Até lá!`, 'bot');
+            }, 1000);
+        }
+    }
+</script>
+
+</body>
+</html>
+' > index.html
+
+echo '
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+header {
+    background: #333;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+header img {
+    height: 50px;
+}
+nav {
+    text-align: center;
+    margin-top: 10px;
+}
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+}
+.main-content {
+    padding: 20px;
+    text-align: center;
+}
+.chatbox {
+    width: 400px;
+    height: 500px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 0 auto;
+    overflow-y: scroll;
+    background: #fff;
+}
+.message {
+    margin: 10px 0;
+}
+.user {
+    text-align: right;
+    color: blue;
+}
+.bot {
+    text-align: left;
+    color: green;
+}
+input[type="text"] {
+    width: 300px;
+    padding: 10px;
+    margin: 10px;
+}
+button {
+    padding: 10px;
+}
+footer {
+    background: #333;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+    margin-top: 20px;
+}
+footer a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+}
+' > styles.css
+
+git add index.html styles.css
+git commit -m "Adiciona LandPage do Chatbot"
+git push origin main
+
 
